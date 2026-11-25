@@ -1,0 +1,2 @@
+/* Optional page defaults: system font, page background and text colour from the tokens. */
+body { margin: 0; font-family: var(--font-text); background: var(--background); color: var(--label); -webkit-font-smoothing: antialiased; }

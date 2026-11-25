@@ -1,0 +1,23 @@
+name: Publish npm package
+# Push a tag such as v0.1.0 to publish. Uses npm trusted publishing (OIDC), so no npm token is stored in the repo;
+# set the package up once on npmjs.com under Settings → Trusted publishing for this repository and workflow.
+on:
+  push:
+    tags:
+      - "v*"
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+          package-manager-cache: false
+      - run: npm install -g npm@latest
+      - run: npm install
+      - run: npm publish --access public
